@@ -51,6 +51,7 @@ function App() {
       setLogs(Array.isArray(data.logs) ? data.logs : []);
       setResult({
         fixedCode: data.fixedCode || "",
+        alternatives: data.alternatives || [],
         explanation: data.explanation || "",
         attempts: data.attempts ?? 0,
         status: data.status || "error",
@@ -60,6 +61,7 @@ function App() {
       setLogs([`❌ Retry... ${requestError.message}`]);
       setResult({
         fixedCode: code,
+        alternatives: [],
         explanation: requestError.message,
         attempts: 0,
         status: "error",

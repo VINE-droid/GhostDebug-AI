@@ -12,6 +12,20 @@ function OutputPanel({ result }) {
             <pre>{result.fixedCode}</pre>
           </div>
 
+          {result.alternatives && result.alternatives.length > 0 && (
+            <div className="output-block alternatives-block">
+              <span className="output-label">Alternative Fixes Considered</span>
+              <div className="alternatives-list">
+                {result.alternatives.map((alt, index) => (
+                  <div key={index} className="alternative-item">
+                    <p className="alternative-desc">💡 {alt.description}</p>
+                    <pre className="alternative-code">{alt.code}</pre>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="stats-grid">
             <div className="stat-card">
               <span className="output-label">Explanation</span>

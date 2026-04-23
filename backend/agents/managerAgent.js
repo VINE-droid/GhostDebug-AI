@@ -25,6 +25,7 @@ async function runDebugWorkflow({ code, error }) {
   let finalExplanation = "No fix generated.";
   let finalConfidence = 0;
   let status = "failed";
+  let finalAlternatives = [];
   const demoMode = isDemoMode(code, error);
 
   logs.push(`🧠 Manager Agent: Received a new debugging task for error "${error}".`);
@@ -59,6 +60,7 @@ async function runDebugWorkflow({ code, error }) {
     currentCode = fix.fixedCode;
     finalExplanation = fix.explanation;
     finalConfidence = reflection.confidence;
+    finalAlternatives = fix.alternatives || [];
 
     if (reflection.success) {
       status = "success";
@@ -77,6 +79,7 @@ async function runDebugWorkflow({ code, error }) {
     status,
     fixedCode: currentCode,
     explanation: finalExplanation,
+    alternatives: finalAlternatives,
     attempts: attempt,
     confidence: finalConfidence,
     logs

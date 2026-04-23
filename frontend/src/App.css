@@ -180,6 +180,39 @@
   margin: 8px 0 0;
 }
 
+.alternatives-block {
+  margin-top: 16px;
+}
+
+.alternatives-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.alternative-item {
+  background: rgba(2, 6, 23, 0.6);
+  border: 1px dashed rgba(139, 92, 246, 0.4);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.alternative-desc {
+  margin: 0 0 8px 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #c4b5fd;
+}
+
+.alternative-code {
+  margin: 0 !important;
+  padding: 12px !important;
+  background: #020617 !important;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  font-size: 0.85rem;
+}
+
 @media (max-width: 900px) {
   .content-grid {
     grid-template-columns: 1fr;

@@ -66,8 +66,23 @@ async function fixAgent({ code, error, research, attempt, demoMode }) {
     ? "I am using a safe but conservative patch first to test whether the syntax error disappears."
     : "I am applying the smallest fix that directly matches the root-cause hypothesis.";
 
+  // Generate alternatives for the "Wow Factor"
+  let alternatives = [];
+  if (demoMode && attempt === 2) {
+    alternatives = [
+      { code: code.replace("return a;", "return a + Number(b);"), description: "Alternative 1: Explicit type casting" },
+      { code: code.replace("return a;", "return a + (b || 0);"), description: "Alternative 2: Nullish fallback" }
+    ];
+  } else if (!demoMode) {
+    alternatives = [
+      { code: `try {\n  ${fixedCode}\n} catch (err) {\n  console.error(err);\n}`, description: "Alternative 1: Wrap in try/catch block" },
+      { code: `// TODO: Refactor this logic\n${fixedCode}`, description: "Alternative 2: Add technical debt marker" }
+    ];
+  }
+
   return {
     fixedCode,
+    alternatives,
     explanation: `${research.summary} ${research.suggestion}`,
     strategy,
     changeSummary,
